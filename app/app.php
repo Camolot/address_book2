@@ -2,11 +2,29 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Contact.php";
 
+    session_start();
+
+    if (empty($_SESSION['list_of_contacts'])) {
+      $_SESSION['list_of_contacts'] = array();
+    }
+
     $app = new Silex\Application();
 
     $app->get("/", function() {
-      return "Home";
-    })
+
+      $output = "";
+
+      if (!empty(Contact::getAll())) {
+        output = "
+            <h1>List of Contacts</h1>
+            <p>Here are all of your contacts:</p>
+        ";
+
+        foreach (Contact::getAll() as $contact) {
+          $output = $output . "<p>" . $task->getDescription() . "</p>";
+        }
+      }
+    });
 
     $app->get("/new_contact", function() {
       return "
@@ -14,7 +32,7 @@
         <html>
           <head>
             <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-            <title>"Add a new contact!"</title>
+            <title>Add a new contact!</title>
           </head>
           <body>
             <div class='container'>
