@@ -12,18 +12,18 @@
 
     $app->get("/", function() {
 
-      $output = "";
-
-      if (!empty(Contact::getAll())) {
-        output = "
-            <h1>List of Contacts</h1>
-            <p>Here are all of your contacts:</p>
-        ";
-
-        foreach (Contact::getAll() as $contact) {
-          $output = $output . "<p>" . $task->getDescription() . "</p>";
-        }
-      }
+      // $output = "";
+      //
+      // if (!empty(Contact::getAll())) {
+      //   output = "
+      //       <h1>List of Contacts</h1>
+      //       <p>Here are all of your contacts:</p>
+      //   ";
+      //
+      //   foreach (Contact::getAll() as $contact) {
+      //     $output = $output . "<p>" . $task->getDescription() . "</p>";
+      //   }
+      // }
     });
 
     $app->get("/new_contact", function() {
