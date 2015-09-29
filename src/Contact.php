@@ -12,12 +12,12 @@
           $this->address = $address;
         }
 
-        function setFirst ($first_name)
+        function setFirstName ($first_name)
         {
           $this->firstName = $first_name;
         }
 
-        function setLast ($last_name)
+        function setLastName ($last_name)
         {
           $this->lastName = $last_name;
         }
@@ -27,12 +27,12 @@
           $this->address = $address;
         }
 
-        function getFirst ()
+        function getFirstName ()
         {
           return $this->first;
         }
 
-        function getLast ()
+        function getLastName ()
         {
           return $this->last;
         }

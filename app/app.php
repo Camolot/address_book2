@@ -35,7 +35,7 @@
             <div class='container'>
               <h1>'Contact Information'</h1>
               <p>'Enter the information for the new contact.'</p>
-              <form action='/view_rectangle'>
+              <form action='/create_contact'>
                 <div class='form-group'>
                   <label for='firstName'>Enter First Name</label>
                   <input id='firstName' name='firstName' class='form-control' type='text'>
@@ -55,12 +55,14 @@
 
     $app->get("/create_contact", function() {
       $my_contact = new Contact($_GET['firstName'], $_GET['lastName'], $_GET['address']);
-      $contacts = array($job);
+      $contacts = array($contact);
 
       $output = "";
       foreach ($contacts as $contact) {
-        $output = $output . "<h1>" . $contact->getFirst() . "</h1>
-          <h2>" . $contact->getContact() . "</h2>
+        $output = $output . "<h1>" . $contact->getFirstName() . "</h1>
+          <h2>" . $contact->getLastName() . "</h2>
+          <h3>" . $contact->getAddress . "</h3>
+          <h4>" . $contact->getContact . "</h4>
         ";
       }
       return "
