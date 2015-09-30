@@ -11,17 +11,26 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
-      $app->get("/",function() {
-          $output = "";
-          if (!empty(Contact::getAll())) {
-              $output .= "
-                  <h1>List of Contacts</h1>
-                  <p>Here are all of your contacts:</p>
-              ";
-              foreach (Contact::getAll() as $contact) {
-                  $output = $output . "<p>" . $contact->getDescription() . "</p>";
-          }
-      }
+    $app->get("/",function() {
+        $output = "";
+        if (!empty(Contact::getAll())) {
+            $output .= "
+                <h1>List of Contacts</h1>
+                <p>Here are all of your contacts:</p>
+            ";
+            foreach (Contact::getAll() as $contact) {
+                $output = $output . "<p>" . $contact->getDescription() . "</p>";
+            }
+        } else {
+            $output .= "
+                <p>Sorry, no contacts found.</p>
+            ";
+        }
+    $output .= "
+        <a href='/new_contact'>Add new contacts</a>
+    ";
+
+    return $output;
     });
 
     $app->get("/new_contact", function() {
@@ -36,7 +45,7 @@
             <div class='container'>
               <h1>'Contact Information'</h1>
               <p>'Enter the information for the new contact.'</p>
-              <form action='/create_contact'>
+              <form action='/contact'>
                 <div class='form-group'>
                   <label for='firstName'>Enter First Name</label>
                   <input id='firstName' name='firstName' class='form-control' type='text'>
@@ -53,18 +62,21 @@
         </html>
         ";
     });
-    var_dump($contact);
-    $app->get("/create_contact", function() {
+
+    // var_dump($contact); can't print outside of get/post functions
+
+    $app->get("/contact", function() {
       $my_contact = new Contact($_GET['firstName'], $_GET['lastName'], $_GET['address']);
-      $contacts = array($contact);
+      $my_contact->save();
+
     //   var_dump($contact);
 
       $output = "";
-      foreach ($contacts as $contact) {
-        $output = $output . "<h1>" . $contact->getFirstName() . "</h1>
+      foreach (Contact::getAll() as $contact) {
+        $output = $output . "
+            <h1>" . $contact->getFirstName() . "</h1>
           <h2>" . $contact->getLastName() . "</h2>
-          <h3>" . $contact->getAddress . "</h3>
-          <h4>" . $contact->getContact . "</h4>
+          <h3>" . $contact->getAddress() . "</h3>
         ";
       }
       return "
@@ -74,7 +86,7 @@
             <title>Your Contacts</title>
           </head>
           <body>
-            " . output . "
+            " . $output . "
           </body>
         </html>";
     });

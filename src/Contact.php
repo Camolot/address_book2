@@ -29,12 +29,12 @@
 
         function getFirstName ()
         {
-          return $this->first;
+          return $this->firstName;
         }
 
         function getLastName ()
         {
-          return $this->last;
+          return $this->lastName;
         }
 
         function getAddress ()
