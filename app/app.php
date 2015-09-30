@@ -52,7 +52,6 @@
           </body>
         </html>
         ";
-        $output = $contact;
     });
     var_dump($contact);
     $app->get("/create_contact", function() {
