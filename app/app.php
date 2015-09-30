@@ -9,6 +9,7 @@
     }
 
     $app = new Silex\Application();
+    $app['debug'] = true;
 
       $app->get("/",function() {
           $output = "";
@@ -51,11 +52,13 @@
           </body>
         </html>
         ";
+        $output = $contact;
     });
-
+    var_dump($contact);
     $app->get("/create_contact", function() {
       $my_contact = new Contact($_GET['firstName'], $_GET['lastName'], $_GET['address']);
       $contacts = array($contact);
+    //   var_dump($contact);
 
       $output = "";
       foreach ($contacts as $contact) {
