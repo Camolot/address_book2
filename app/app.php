@@ -58,10 +58,12 @@
                 </div>
                 <button type='submit' class='btn-success'>Create Contact</button>
               </form>
-
+              <hr>
               <form action='/delete_contact' method='post'>
                 <button type='submit' class='btn-failure'>Delete Contacts</button>
               </form>
+              <br>
+              <a href='/'>Return to Contacts List</a>
 
             </div>
           </body>
@@ -95,6 +97,8 @@
             <hr>
             " . $output . "
             <hr>
+            <a href='/new_contact'>Make a New Contact</a>
+            <a href='/'>Return to Contacts List</a>
           </body>
         </html>";
     });
