@@ -10,6 +10,9 @@
 
     $app = new Silex\Application();
     $app['debug'] = true;
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
+      'twig.path' => __DIR__.'/../views'
+    ));
 
     $app->get("/",function() {
         $output = "";
@@ -34,41 +37,7 @@
     });
 
     $app->get("/new_contact", function() {
-      return "
-      <!DOCTYPE html>
-        <html>
-          <head>
-            <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-            <title>Add a new contact!</title>
-          </head>
-          <body>
-            <div class='container'>
-              <h1>'Contact Information'</h1>
-              <p>'Enter the information for the new contact.'</p>
-              <form action='/contact'>
-                <div class='form-group'>
-                  <label for='firstName'>Enter First Name</label>
-                  <input id='firstName' name='firstName' class='form-control' type='text'>
-
-                  <label for='lastName'>Enter Last name</label>
-                  <input id='lastName' name='lastName' class='form-control' type='text'>
-
-                  <label for='address'>Enter Address</label>
-                  <input id='address' name='address' class='form-control' type='text'>
-                </div>
-                <button type='submit' class='btn-success'>Create Contact</button>
-              </form>
-              <hr>
-              <form action='/delete_contact' method='post'>
-                <button type='submit' class='btn-failure'>Delete Contacts</button>
-              </form>
-              <br>
-              <a href='/'>Return to Contacts List</a>
-
-            </div>
-          </body>
-        </html>
-        ";
+      return $app['twig']->render('contact.html.twig');
     });
 
     // var_dump($contact); can't print outside of get/post functions
