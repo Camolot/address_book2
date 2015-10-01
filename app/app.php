@@ -57,18 +57,22 @@
         ";
       }
       return "
-      <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Your Contacts</title>
-          </head>
-          <body>
-            <hr>
-            " . $output . "
-            <hr>
-            <a href='/new_contact'>Make a New Contact</a>
-            <a href='/'>Return to Contacts List</a>
-          </body>
+        <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Your Contacts</title>
+            </head>
+            <body>
+              <hr>
+              " . $output . "
+              <hr>
+              <a href='/new_contact'>Make a New Contact</a>
+              <a href='/'>Return to Contacts List</a>
+              <hr>
+              <form action='/delete_contact' method='post'>
+                <button type='submit' class='btn-failure'>Delete Contacts</button>
+              </form>
+            </body>
         </html>";
     });
 
