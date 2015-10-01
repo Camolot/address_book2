@@ -56,7 +56,13 @@
                   <label for='address'>Enter Address</label>
                   <input id='address' name='address' class='form-control' type='text'>
                 </div>
-                <button type='submit' class='btn-success'>Create</button>
+                <button type='submit' class='btn-success'>Create Contact</button>
+              </form>
+
+              <form action='/delete_contact' method='post'>
+                <button type='submit' class='btn-failure'>Delete Contacts</button>
+              </form>
+
             </div>
           </body>
         </html>
@@ -69,7 +75,7 @@
       $my_contact = new Contact($_GET['firstName'], $_GET['lastName'], $_GET['address']);
       $my_contact->save();
 
-    //   var_dump($contact);
+      // var_dump($contact);
 
       $output = "";
       foreach (Contact::getAll() as $contact) {
@@ -86,9 +92,20 @@
             <title>Your Contacts</title>
           </head>
           <body>
+            <hr>
             " . $output . "
+            <hr>
           </body>
         </html>";
+    });
+
+    $app->post("/delete_contact", function() {
+      Contact::deleteAll();
+
+      return "
+          <h1>Contacts Cleared!</h1>
+          <p><a href='/new_contact'>Home</a></p>
+      ";
     });
 
     return $app;
