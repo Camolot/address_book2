@@ -36,8 +36,8 @@
     return $output;
     });
 
-    $app->get("/new_contact", function() {
-      return $app['twig']->render('contact.html.twig');
+    $app->get("/new_contact", function() use ($app) {
+      return $app['twig']->render('contact.html.twig', array('contact' => Contact::getAll()));
     });
 
     // var_dump($contact); can't print outside of get/post functions
