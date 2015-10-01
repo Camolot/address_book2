@@ -20,9 +20,18 @@
             $output .= "
                 <h1>List of Contacts</h1>
                 <p>Here are all of your contacts:</p>
+                <hr>
+                <form action='/delete_contact' method='post'>
+                  <button type='submit' class='btn-failure'>Delete Contacts</button>
+                </form>
+                <hr>
             ";
             foreach (Contact::getAll() as $contact) {
-                $output = $output . "<p>" . $contact->getDescription() . "</p>";
+                $output = $output . "
+                    <h3>First Name: " . $contact->getFirstName() . "</h3>
+                    <h3>Last Name: " . $contact->getLastName() . "</h3>
+                    <h3>Address: " . $contact->getAddress() . "</h3><hr>
+                ";
             }
         } else {
             $output .= "
@@ -51,9 +60,9 @@
       $output = "";
       foreach (Contact::getAll() as $contact) {
         $output = $output . "
-            <h1>" . $contact->getFirstName() . "</h1>
-          <h2>" . $contact->getLastName() . "</h2>
-          <h3>" . $contact->getAddress() . "</h3>
+            <h3>First Name: " . $contact->getFirstName() . "</h3>
+          <h3>Last Name: " . $contact->getLastName() . "</h3>
+          <h3>Address: " . $contact->getAddress() . "</h3><hr>
         ";
       }
       return "
