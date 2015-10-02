@@ -85,13 +85,9 @@
         </html>";
     });
 
-    $app->post("/delete_contact", function() {
+    $app->post("/delete_contact", function() use ($app) {
       Contact::deleteAll();
-
-      return "
-          <h1>Contacts Cleared!</h1>
-          <p><a href='/new_contact'>Home</a></p>
-      ";
+      return $app['twig']->render('delete_contact.html.twig');
     });
 
     return $app;
