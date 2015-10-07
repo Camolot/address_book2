@@ -51,38 +51,23 @@
 
     // var_dump($contact); can't print outside of get/post functions
 
-    $app->get("/contact", function() {
+    $app->get("/contact", function() use ($app) {
       $my_contact = new Contact($_GET['firstName'], $_GET['lastName'], $_GET['address']);
       $my_contact->save();
 
       // var_dump($contact);
 
-      $output = "";
-      foreach (Contact::getAll() as $contact) {
-        $output = $output . "
-            <h3>First Name: " . $contact->getFirstName() . "</h3>
-          <h3>Last Name: " . $contact->getLastName() . "</h3>
-          <h3>Address: " . $contact->getAddress() . "</h3><hr>
-        ";
-      }
-      return "
-        <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Your Contacts</title>
-            </head>
-            <body>
-              <hr>
-              " . $output . "
-              <hr>
-              <a href='/new_contact'>Make a New Contact</a>
-              <a href='/'>Return to Contacts List</a>
-              <hr>
-              <form action='/delete_contact' method='post'>
-                <button type='submit' class='btn-failure'>Delete Contacts</button>
-              </form>
-            </body>
-        </html>";
+    //   $output = "";
+    //   foreach (Contact::getAll() as $contact) {
+    //     $output = $output . "
+    //         <h3>First Name: " . $contact->getFirstName() . "</h3>
+    //       <h3>Last Name: " . $contact->getLastName() . "</h3>
+    //       <h3>Address: " . $contact->getAddress() . "</h3><hr>
+    //     ";
+    //   }
+
+      return $app['twig']->render('contact_list.html.twig', array('contacts' => Contact::getAll()));
+
     });
 
     $app->post("/delete_contact", function() use ($app) {

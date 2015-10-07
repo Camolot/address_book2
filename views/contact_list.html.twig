@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Your Contacts</title>
+    </head>
+    <body>
+      <hr>
+
+      {% for current_contact in contacts %}
+          <h3>First Name: {{ current_contact.getFirstName() }} </h3>
+          <h3>Last Name: {{ current_contact.getLastName() }}</h3>
+          <h3>Address: {{ current_contact.getAddress() }} </h3><hr>
+      {% endfor %}
+
+
+
+      <hr>
+      <a href='/new_contact'>Make a New Contact</a>
+      <a href='/'>Return to Contacts List</a>
+      <hr>
+      <form action='/delete_contact' method='post'>
+        <button type='submit' class='btn-failure'>Delete Contacts</button>
+      </form>
+    </body>
+</html>
